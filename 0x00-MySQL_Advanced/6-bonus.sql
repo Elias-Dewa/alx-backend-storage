@@ -3,9 +3,9 @@
 DELIMITER |
 
 CREATE PROCEDURE AddBonus (
-  IN user_id INT,
-  IN project_name VARCHAR(255),
-  IN score float
+  user_id INT,
+  project_name VARCHAR(255),
+  score float
 )
 BEGIN
   INSERT INTO projects (name)
