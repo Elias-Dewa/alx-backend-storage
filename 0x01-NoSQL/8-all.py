@@ -11,4 +11,4 @@ def list_all(mongo_collection):
     Returns:
         List: list of collections
     """
-    return [mongo_collection.find()]
+    return list(mongo_collection.find())
