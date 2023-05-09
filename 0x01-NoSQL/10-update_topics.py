@@ -13,5 +13,5 @@ def update_topics(mongo_collection, name, topics):
     Returns:
         _type_: values with the type
     """
-    return mongo_collection.update_many({name: "name"},
+    return mongo_collection.update_many({"name": name},
                                         {"$set": {"topics": topics}})
