@@ -42,4 +42,4 @@ class Cache():
     def get_int(self, key):
         """method to automatically parametrize Cache.get
         """
-        return self._redis.get(key, int)
+        return self.get(key, int)
