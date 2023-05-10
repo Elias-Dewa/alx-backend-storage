@@ -19,7 +19,7 @@ def count_calls(method: Callable) -> Callable:
         """
         key = method.__qualname__
         self._redis.incr(key)
-        return str(method(self, *args, **kwds))
+        return method(self, *args, **kwds)
     return wrapper
 
 
@@ -33,9 +33,9 @@ def call_history(method: Callable) -> Callable:
         key = method.__qualname__
         inputs = key + ":inputs"
         outputs = key + ":outputs"
-        self._redis.rpush(inputs, args)
-        value = str(method(self, *args, **kwds))
-        self._redis.rpush(outputs, value)
+        self._redis.rpush(inputs, str(args))
+        value = method(self, *args, **kwds)
+        self._redis.rpush(outputs, str(value))
         return value
     return wrapper
 
