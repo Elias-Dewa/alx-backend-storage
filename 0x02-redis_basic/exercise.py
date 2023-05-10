@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Writing strings to Redis"""
 
+from functools import wraps
 from typing import Callable, Optional, Union
 from uuid import uuid4
 import redis
@@ -11,12 +12,12 @@ def count_calls(method: Callable) -> Callable:
     that key every time the method is called and
     returns the value returned by the original method.
     """
-    key = method.__qualname__
 
     @wraps(method)
     def wrapper(self, *args, **kwds):
         """a method that return a wrapper function
         """
+        key = method.__qualname__
         self._redis.incr(key)
         return str(method(self, *args, **kwds))
     return wrapper
