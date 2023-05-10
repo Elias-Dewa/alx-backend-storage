@@ -13,6 +13,7 @@ def count_calls(method: Callable) -> Callable:
     """
     key = method.__qualname__
 
+    @wraps(method)
     def wrapper(self, *args, **kwds):
         """a method that return a wrapper function
         """
