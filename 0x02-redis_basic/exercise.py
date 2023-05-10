@@ -6,6 +6,19 @@ from uuid import uuid4
 import redis
 
 
+def count_calls(method: Callable) -> Callable:
+    """a method that return function that increments the count for
+    that key every time the method is called and
+    returns the value returned by the original method.
+    """
+    key = method.__qualname__
+
+    def wrapper(self, *args, **kwargs):
+        self._redis.incr(key)
+        return method(*args, **kwargs)
+    return wrapper
+
+
 class Cache():
     """Define a cache class
     """
@@ -42,4 +55,4 @@ class Cache():
     def get_int(self, key):
         """method to automatically parametrize Cache.get
         """
-        return self.get(key, int)
+        return self._redis.get(key, int)
