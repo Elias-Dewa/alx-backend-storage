@@ -40,6 +40,13 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
+def replay(fn: Callable):
+    """a method to display the history of calls of a particular function"""
+    fn_name = fn.__qualname__
+    inputs = fn_name + ":inputs"
+    outputs = fn_name + ":outputs"
+
+
 class Cache():
     """Define a cache class
     """
