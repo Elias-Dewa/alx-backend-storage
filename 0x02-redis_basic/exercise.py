@@ -43,8 +43,8 @@ def call_history(method: Callable) -> Callable:
 def replay(fn: Callable):
     """a method to display the history of calls of a particular function"""
     fn_name = fn.__qualname__
-    inputs = fn_name + ":inputs"
-    outputs = fn_name + ":outputs"
+    inputs = redis.Redis().lrange(fn_name + ":inputs", 0, -1)
+    outputs = redis.Redis().lrange(fn_name + ":outputs", 0, -1)
 
 
 class Cache():
