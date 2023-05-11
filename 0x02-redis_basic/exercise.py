@@ -61,7 +61,7 @@ class Cache():
         return generate_random_key
 
     def get(self, key: str,
-            fn: Optional[Callable]) -> Union[str, bytes, int, float]:
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """method that take a key string argument and
         an optional Callable argument
         """
